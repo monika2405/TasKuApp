@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TasKu</string>
+    <string name="examplenotes1">Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum</string>
+    <string name="examplenotes2">Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLoremIpsum</string>
+    <string name="examplenotes3">Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLoremLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLoremLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum</string>
+
+</resources>
