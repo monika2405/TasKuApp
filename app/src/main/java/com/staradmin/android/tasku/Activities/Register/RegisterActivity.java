@@ -2,13 +2,14 @@ package com.staradmin.android.tasku.Activities.Register;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,13 +18,15 @@ import android.widget.DatePicker;
 
 import com.staradmin.android.tasku.Callback.callback_register;
 import com.staradmin.android.tasku.Activities.Menu.MenuActivity;
+import com.staradmin.android.tasku.Network.ConnectivityReceiver;
+import com.staradmin.android.tasku.Network.MyApplication;
 import com.staradmin.android.tasku.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
     private Button mRegBtn;
     private TextInputEditText mfirstname, mlastname, memail, mphonenumb, mpassword, mconfirmpass, musername, mDisplayDate ;
     private String stringFirstName, stringLastName, stringEmail, stringPhoneNumb, stringPassword, stringConfirmPass, stringBirthDate, stringUsername;
@@ -83,33 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
         mRegBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stringFirstName = mfirstname.getText().toString();
-                stringLastName = mlastname.getText().toString();
-                stringEmail = memail.getText().toString();
-                stringPhoneNumb = mphonenumb.getText().toString();
-                stringPassword = mpassword.getText().toString();
-                stringConfirmPass = mconfirmpass.getText().toString();
-                stringUsername = musername.getText().toString();
-                stringBirthDate = mDisplayDate.getText().toString();
-
-
-                Log.d("First Name", stringFirstName);
-                ArrayList<HashMap<String, String>> alBookPick = null;
-
-
-                if(stringFirstName.isEmpty()){
-                    mfirstname.setError("Field cannot be empty");
-                }
-                else if(stringLastName.isEmpty()){
-                    mlastname.setError("Field cannot be empty");
-                }else{
-                    alBookPick = Eksekusi(stringEmail, stringUsername, stringPassword, stringFirstName+" "+stringLastName, stringBirthDate, stringPhoneNumb);
-                    Intent intent = new Intent(RegisterActivity.this, MenuActivity.class);
-                    startActivity(intent);
-                }
-
-
-
+                checkConnection();
             }
         });
     }
@@ -141,5 +118,66 @@ public class RegisterActivity extends AppCompatActivity {
         }else{
             return false;
         }
+    }
+
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        doSomething(isConnected);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        doSomething(isConnected);
+    }
+
+    private void doSomething(boolean isConnected) {
+        if (isConnected){
+            stringFirstName = mfirstname.getText().toString();
+            stringLastName = mlastname.getText().toString();
+            stringEmail = memail.getText().toString();
+            stringPhoneNumb = mphonenumb.getText().toString();
+            stringPassword = mpassword.getText().toString();
+            stringConfirmPass = mconfirmpass.getText().toString();
+            stringUsername = musername.getText().toString();
+            stringBirthDate = mDisplayDate.getText().toString();
+
+
+            Log.d("First Name", stringFirstName);
+            ArrayList<HashMap<String, String>> alBookPick = null;
+
+
+            if(stringFirstName.isEmpty()){
+                mfirstname.setError("Field cannot be empty");
+            }
+            else if(stringLastName.isEmpty()){
+                mlastname.setError("Field cannot be empty");
+            }else{
+                alBookPick = Eksekusi(stringEmail, stringUsername, stringPassword, stringFirstName+" "+stringLastName, stringBirthDate, stringPhoneNumb);
+                Intent intent = new Intent(RegisterActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }
+        }else{
+            androidx.appcompat.app.AlertDialog.Builder alertDialog = new androidx.appcompat.app.AlertDialog.Builder(this);
+            alertDialog.setTitle("No Internet Connection");
+            alertDialog.setMessage("Check your Internet Connection");
+            alertDialog.setNegativeButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,	int which) {
+                            // Write your code here to execute after dialog
+                            dialog.cancel();
+                        }
+                    });
+
+            // Showing Alert Message
+            alertDialog.show();
+        }
+
     }
 }

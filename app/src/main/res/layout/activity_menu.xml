@@ -7,7 +7,7 @@
     android:background="@drawable/bg2"
     tools:context=".Activities.Menu.MenuActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -252,6 +252,7 @@
                     android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
+                    android:id="@+id/alarm"
                     >
 
 
@@ -282,6 +283,6 @@
                 android:text="Log Out" />
 
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

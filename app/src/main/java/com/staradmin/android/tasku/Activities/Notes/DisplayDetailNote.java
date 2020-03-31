@@ -1,25 +1,20 @@
 package com.staradmin.android.tasku.Activities.Notes;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.staradmin.android.tasku.Activities.Login.LoginActivity;
 import com.staradmin.android.tasku.Callback.callback_delete_notes;
-import com.staradmin.android.tasku.Callback.callback_login;
 import com.staradmin.android.tasku.Callback.callback_update_notes;
-import com.staradmin.android.tasku.Model.NotesItem;
 import com.staradmin.android.tasku.R;
 
 import java.text.DateFormat;
@@ -46,6 +41,7 @@ public class DisplayDetailNote extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         mTitle = findViewById(R.id.titleNote);
         mDesc= findViewById(R.id.descNote);
@@ -87,16 +83,37 @@ public class DisplayDetailNote extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_TEXT,desc);
             startActivity(Intent.createChooser(intent,"Share using"));
         }else if(id == R.id.delete){
-            mProgressDialog = new ProgressDialog(DisplayDetailNote.this);
-            mProgressDialog.show();
-            mProgressDialog.setContentView(R.layout.progress_dialog);
-            mProgressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            ArrayList<HashMap<String, String>> alBookPick;
-            alBookPick = Eksekusi(mIdNew);
-            if(alBookPick.size()>0){
-                Intent intent = new Intent(DisplayDetailNote.this, ListNotesActivity.class);
-                startActivity(intent);
-            }
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("Confirm Delete...");
+            alertDialog.setMessage("Are you sure you want delete this?");
+            alertDialog.setPositiveButton("YES",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int which) {
+                            // Write your code here to execute after dialog
+                            mProgressDialog = new ProgressDialog(DisplayDetailNote.this);
+                            mProgressDialog.show();
+                            mProgressDialog.setContentView(R.layout.progress_dialog);
+                            mProgressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                            ArrayList<HashMap<String, String>> alBookPick;
+                            alBookPick = Eksekusi(mIdNew);
+                            if(alBookPick.size()>0){
+                                Intent intent = new Intent(DisplayDetailNote.this, ListNotesActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+            // Setting Negative "NO" Button
+            alertDialog.setNegativeButton("NO",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,	int which) {
+                            // Write your code here to execute after dialog
+                            dialog.cancel();
+                        }
+                    });
+
+            // Showing Alert Message
+            alertDialog.show();
+
         }else if(id == R.id.finish){
             mProgressDialog = new ProgressDialog(DisplayDetailNote.this);
             mProgressDialog.show();

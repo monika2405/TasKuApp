@@ -68,19 +68,14 @@ public class callback_update_notes extends AsyncTask<String, String, ArrayList<H
 
 
             if (success == 1) {
-                jsonArray = json.getJSONArray("data");
+                HashMap<String, String> map = new HashMap<String, String>();
 
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject c = jsonArray.getJSONObject(i);
-
-                    HashMap<String, String> map = new HashMap<String, String>();
-
-                    map.put("success", String.valueOf(success));
-                    map.put("message", message);
+                map.put("success", String.valueOf(success));
+                map.put("message", message);
 
 
-                    arrayListRet.add(map);
-                }
+                arrayListRet.add(map);
+
             } else {
                 //Unsuccessfully picking book. Another driver has taken the order.
                 HashMap<String, String> map = new HashMap<String, String>();

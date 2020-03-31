@@ -2,8 +2,8 @@ package com.staradmin.android.tasku.Activities.Notes.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +26,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHol
     @Override
     public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new NotesViewHolder(
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.rev_item,parent,false)
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.notes_item,parent,false)
         );
     }
 

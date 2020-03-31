@@ -1,7 +1,11 @@
 package com.staradmin.android.tasku.Activities.Login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,36 +15,42 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.staradmin.android.tasku.Callback.callback_login;
+import com.staradmin.android.tasku.DrawerActivity;
 import com.staradmin.android.tasku.LocalStorage;
 import com.staradmin.android.tasku.Activities.Menu.MenuActivity;
+import com.staradmin.android.tasku.Network.ConnectivityReceiver;
+import com.staradmin.android.tasku.Network.MyApplication;
 import com.staradmin.android.tasku.R;
 import com.staradmin.android.tasku.Activities.Register.RegisterActivity;
+import com.staradmin.android.tasku.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
     private Button mSign;
     private TextView mCreate;
     private EditText mUsername, mPassword;
     private String stringUsername, stringPassword;
     private static final String TAG = "LoginActivity";
+    private static final String DEBUG_TAG = "NetworkStatusExample";
+    final LocalStorage localStorage = new LocalStorage();
 
     //Validation Email
     String user, pass;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
 
-        final LocalStorage localStorage = new LocalStorage();
-
         if(localStorage.getCustomerId(getApplicationContext())!=""){
+
             finish();
-            Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+            Intent intent = new Intent(getApplicationContext(), DrawerActivity.class);
             startActivity(intent);
         }
         mSign = findViewById(R.id.btnSign);
@@ -51,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         mSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 stringUsername = mUsername.getText().toString();
                 stringPassword = mPassword.getText().toString();
                 Log.d(TAG, "onClick: " + user);
@@ -62,21 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                     mPassword.setError("Field cannot be empty");
                 }
                 else {
-                    ArrayList<HashMap<String, String>> alBookPick;
-                    alBookPick = Eksekusi(stringUsername, stringPassword);
-                    if(alBookPick.size()>0){
-                        localStorage.setCustomerId(getApplicationContext(),alBookPick.get(0).get("id"));
-                        localStorage.setusername(getApplicationContext(),stringUsername);
-                        localStorage.setpassword(getApplicationContext(),stringPassword);
-                        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                        startActivity(intent);
-
-                    }else{
-                        Toast.makeText(LoginActivity.this,"Password or Email is wrong", Toast.LENGTH_SHORT).show();
-                    }
-                    }
-
+                    checkConnection();
+                }
             }
+
         });
 
         mCreate.setOnClickListener(new View.OnClickListener() {
@@ -110,5 +110,54 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Do Here what ever you want do on back press;
+    }
+
+    private void checkConnection() {
+        boolean isConnected = ConnectivityReceiver.isConnected();
+        doSomething(isConnected);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register connection status listener
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        doSomething(isConnected);
+    }
+
+    private void doSomething(boolean isConnected) {
+        if (isConnected){
+            ArrayList<HashMap<String, String>> alBookPick;
+            alBookPick = Eksekusi(stringUsername, stringPassword);
+            if(alBookPick.size()>0) {
+                localStorage.setCustomerId(getApplicationContext(), alBookPick.get(0).get("id"));
+                localStorage.setusername(getApplicationContext(), stringUsername);
+                localStorage.setpassword(getApplicationContext(), stringPassword);
+
+                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(LoginActivity.this,"Password or Email is wrong", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle("No Internet Connection");
+            alertDialog.setMessage("Check your Internet Connection");
+            alertDialog.setNegativeButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,	int which) {
+                            // Write your code here to execute after dialog
+                            dialog.cancel();
+                        }
+                    });
+
+            // Showing Alert Message
+            alertDialog.show();
+        }
+
     }
 }

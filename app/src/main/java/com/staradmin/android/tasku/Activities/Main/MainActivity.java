@@ -1,7 +1,7 @@
 package com.staradmin.android.tasku.Activities.Main;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.staradmin.android.tasku.Activities.Login.LoginActivity;
