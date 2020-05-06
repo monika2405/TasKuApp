@@ -14,15 +14,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.staradmin.android.tasku.Callback.callback_login;
-import com.staradmin.android.tasku.DrawerActivity;
-import com.staradmin.android.tasku.LocalStorage;
 import com.staradmin.android.tasku.Activities.Menu.MenuActivity;
+import com.staradmin.android.tasku.Callback.callback_login;
+import com.staradmin.android.tasku.LocalStorage;
 import com.staradmin.android.tasku.Network.ConnectivityReceiver;
 import com.staradmin.android.tasku.Network.MyApplication;
 import com.staradmin.android.tasku.R;
 import com.staradmin.android.tasku.Activities.Register.RegisterActivity;
-import com.staradmin.android.tasku.ui.home.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         if(localStorage.getCustomerId(getApplicationContext())!=""){
 
             finish();
-            Intent intent = new Intent(getApplicationContext(), DrawerActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
             startActivity(intent);
         }
         mSign = findViewById(R.id.btnSign);
@@ -91,12 +89,12 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
     public ArrayList<HashMap<String, String>> Eksekusi(String v1, String v2) {
         ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
 
-        callback_login update_book = new callback_login(LoginActivity.this);
-        //Log.d("CEKIDBOOK",id_book);
-        try {
-            arrayList = update_book.execute(
-                    v1
-                    , v2
+            callback_login update_book = new callback_login(LoginActivity.this);
+            //Log.d("CEKIDBOOK",id_book);
+            try {
+                arrayList = update_book.execute(
+                        v1
+                        , v2
             ).get();
             Log.d(TAG, "Eksekusi: "+v1);
             Log.d(TAG, "Eksekusi: "+v2);

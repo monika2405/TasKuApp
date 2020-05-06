@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.staradmin.android.tasku.Activities.Menu.MenuActivity;
 import com.staradmin.android.tasku.Activities.Notes.Adapter.NotesAdapter;
 import com.staradmin.android.tasku.LocalStorage;
 import com.staradmin.android.tasku.Model.NotesItem;
@@ -91,9 +92,16 @@ public class ListNotesActivity extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==android.R.id.home){
+            Intent intent = new Intent(ListNotesActivity.this, MenuActivity.class);
+            startActivity(intent);
             finish();
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 
 }

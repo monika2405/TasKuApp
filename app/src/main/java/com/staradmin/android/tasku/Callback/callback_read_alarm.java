@@ -77,9 +77,10 @@ public class callback_read_alarm extends AsyncTask<String, String, ArrayList<Has
 
                     map.put("id_alarm", c.getString("id_alarm"));
                     map.put("alarm_title", c.getString("alarm_title"));
-                    map.put("alarm_desc", c.getString("alarm_desc"));
+
                     map.put("alarm_time", c.getString("alarm_time"));
                     map.put("alarm_freq", c.getString("alarm_freq"));
+                    map.put("alarm_onOff", c.getString("alarm_onOff"));
 
 
                     arrayListRet.add(map);

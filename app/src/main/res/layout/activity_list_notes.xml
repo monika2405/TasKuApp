@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_plus"
+        android:src="@drawable/ic_add_white_24dp"
         android:layout_margin="16dp"
         android:contentDescription="create"
         android:elevation="6dp"

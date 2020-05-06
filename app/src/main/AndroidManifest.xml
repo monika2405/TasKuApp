@@ -10,15 +10,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".DrawerActivity"
-            android:label="@string/title_activity_drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Activities.Keuangan.KeuanganList"></activity>
+        <activity android:name=".Activities.Keuangan.PengeluaranActivity" />
+        <activity android:name=".Activities.Keuangan.PemasukanActivity" />
+        <activity android:name=".Activities.Keuangan.TransactionActivity" />
+        <activity android:name=".Activities.Book.PDFViewerActivity" />
+        <activity android:name=".Activities.Book.PDFActivity" />
+        <activity android:name=".Activities.Book.BookList" />
         <activity android:name=".Activities.Profile.EditProfileActivity" />
         <activity android:name=".Activities.Profile.ProfileActivity" />
         <activity android:name=".Activities.Alarm.DisplayDetailAlarm" />
-        <activity android:name=".Activities.Alarm.CreateAlarmActivity" />
+        <activity
+            android:name=".Activities.Alarm.CreateAlarmActivity"
+            android:parentActivityName=".Activities.Alarm.ListAlarmActivity" />
         <activity android:name=".Activities.Alarm.Adapter.AlarmAdapter" />
         <activity
             android:name=".Activities.Alarm.ListAlarmActivity"
@@ -26,8 +31,12 @@
         <activity
             android:name=".Activities.Notes.DisplayDetailNote"
             android:parentActivityName=".Activities.Notes.ListNotesActivity" />
-        <activity android:name=".Activities.Notes.ListNotesActivity" />
-        <activity android:name=".Activities.Notes.CreateNotesActivity" />
+        <activity
+            android:name=".Activities.Notes.ListNotesActivity"
+            android:parentActivityName=".Activities.Menu.MenuActivity" />
+        <activity
+            android:name=".Activities.Notes.CreateNotesActivity"
+            android:parentActivityName=".Activities.Notes.ListNotesActivity" />
         <activity android:name=".Activities.Menu.MenuActivity" />
         <activity android:name=".Activities.Login.LoginActivity" />
         <activity android:name=".Activities.Register.RegisterActivity" /> <!-- uCrop cropping activity -->
@@ -38,6 +47,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/AppTheme" />
 
         <receiver
             android:name=".Network.ConnectivityReceiver"
@@ -46,11 +58,23 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-    </application>
+        <receiver
+            android:name=".Activities.Alarm.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".Activities.Alarm.AlarmService"
+            android:enabled="true"
+            android:exported="true" />
+    </application> <!-- You need the permission to set the alarm -->
+    <uses-permission android:name="your.package.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 

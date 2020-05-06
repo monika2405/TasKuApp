@@ -5,14 +5,24 @@ public class AlarmItem {
     String time_alarm;
     String title_alarm;
     String freq_alarm;
-    String desc_alarm;
+    int onOff_alarm;
 
-    public AlarmItem(String id_alarm, String time_alarm, String title_alarm,  String desc_alarm, String freq_alarm) {
+    public int getOnOff_alarm() {
+        return onOff_alarm;
+    }
+
+    public void setOnOff_alarm(int onOff_alarm) {
+        this.onOff_alarm = onOff_alarm;
+    }
+
+
+
+    public AlarmItem(String id_alarm, String time_alarm, String title_alarm,  String freq_alarm, int onOff_alarm) {
         this.id_alarm = id_alarm;
         this.time_alarm = time_alarm;
         this.title_alarm = title_alarm;
         this.freq_alarm = freq_alarm;
-        this.desc_alarm = desc_alarm;
+        this.onOff_alarm = onOff_alarm;
     }
 
 
@@ -48,13 +58,6 @@ public class AlarmItem {
         this.freq_alarm = freq_alarm;
     }
 
-    public String getDesc_alarm() {
-        return desc_alarm;
-    }
-
-    public void setDesc_alarm(String desc_alarm) {
-        this.desc_alarm = desc_alarm;
-    }
 
 
 }

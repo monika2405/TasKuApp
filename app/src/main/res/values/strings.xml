@@ -13,5 +13,8 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_profile">Profile</string>
+    <string name="alert_agree">@android:string/ok</string>
+    <string name="alert_conn_title">Error Koneksi</string>
+    <string name="alert_conn_desc">Terjadi kesalahan pada koneksi atau server.</string>
 
 </resources>

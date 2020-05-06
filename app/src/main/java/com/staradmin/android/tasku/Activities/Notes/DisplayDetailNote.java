@@ -70,9 +70,16 @@ public class DisplayDetailNote extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
+
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
         if(id==android.R.id.home){
+            Intent intent = new Intent(DisplayDetailNote.this,ListNotesActivity.class);
+            startActivity(intent);
             finish();
         }else if (id == R.id.share){
             Intent intent = new Intent(Intent.ACTION_SEND);

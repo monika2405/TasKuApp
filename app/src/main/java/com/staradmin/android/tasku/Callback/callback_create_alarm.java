@@ -52,9 +52,10 @@ public class callback_create_alarm extends AsyncTask<String, String, ArrayList<H
 
         paramsed.add(new BasicNameValuePair("id_user", params[0])); //id
         paramsed.add(new BasicNameValuePair("alarm_title", params[1])); //title
-        paramsed.add(new BasicNameValuePair("alarm_desc", params[2])); //content
-        paramsed.add(new BasicNameValuePair("alarm_time", params[3])); //date
-        paramsed.add(new BasicNameValuePair("alarm_freq", params[4])); //date
+
+        paramsed.add(new BasicNameValuePair("alarm_time", params[2])); //date
+        paramsed.add(new BasicNameValuePair("alarm_freq", params[3])); //date
+        paramsed.add(new BasicNameValuePair("alarm_onOff", params[4])); //date
 
 
         JSONObject json = jsonParser.makeHttpRequest("http://dev.projectlab.co.id/mit/1417002/mst_create_alarm.php",

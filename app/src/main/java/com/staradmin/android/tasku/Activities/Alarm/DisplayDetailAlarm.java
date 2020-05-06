@@ -81,6 +81,8 @@ public class DisplayDetailAlarm extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
+            Intent intent =new Intent(DisplayDetailAlarm.this, ListAlarmActivity.class);
+            startActivity(intent);
             finish();
         }else if(id == R.id.finish){
             mProgressDialog = new ProgressDialog(DisplayDetailAlarm.this);
@@ -100,6 +102,11 @@ public class DisplayDetailAlarm extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
     }
 
     public ArrayList<HashMap<String, String>> Eksekusi(String v1, String v2, String v3) {

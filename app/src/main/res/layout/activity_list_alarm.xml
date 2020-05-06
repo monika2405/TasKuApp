@@ -2,42 +2,38 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="vertical"
     tools:context=".Activities.Alarm.ListAlarmActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:background="#91D3FF"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/alarmRecycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include
-            layout="@layout/alarm_appbar"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/alarm_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-    </LinearLayout>
-
-
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="60dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add"
+        android:id="@+id/fab_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:src="@drawable/ic_plus"
         android:layout_margin="16dp"
-        android:contentDescription="create"
+        app:fabSize="normal"
+        android:backgroundTint="#fff"
         android:elevation="6dp"
-        app:elevation="6dp"
-        app:rippleColor="@color/colorRipple"
-        android:clickable="true"
-        />
+        android:src="@drawable/ic_access_alarm_black_24dp"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

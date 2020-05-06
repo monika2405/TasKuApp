@@ -4,153 +4,149 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Activities.Alarm.CreateAlarmActivity">
-
-    <include
-        layout="@layout/alarm_appbar"/>
-
-    <com.google.android.material.textfield.TextInputLayout
+    tools:context=".Activities.Alarm.CreateAlarmActivity"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/alarm_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:orientation="horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Title"
-            android:inputType="text"
-            android:padding="16dp"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Detail"
-            android:inputType="text"
-            android:padding="16dp"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Pick Time"
-            android:inputType="text"
-            android:padding="16dp"
-            android:singleLine="true" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Repeat on"
-        android:textSize="16sp"
-        android:paddingRight="20dp"
-        android:paddingLeft="20dp"
+        android:hint="Alarm Title"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+    <TextView
+        android:id="@+id/tv"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="30sp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:layout_gravity="center"
+        />
+
+    <TimePicker
+        android:id="@+id/tp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="16dp">
-        <ToggleButton
-            android:id="@+id/sunday"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/sunbutton"
-            android:text=""
-            android:textOff=""
-            android:textOn=""/>
-        <ToggleButton
-            android:id="@+id/monday"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/monbutton"
-            android:text=""
-            android:textOff=""
-            android:textOn=""/>
-        <ToggleButton
-            android:id="@+id/tues"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/tbutton"
-            android:text=""
-            android:textOff=""
-            android:textOn=""/>
+        android:layout_below="@id/tv"
+        android:timePickerMode="spinner"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center" />
 
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repeat"
+        android:textColor="#000"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"/>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="16dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp">
 
-        <ToggleButton
+        <CheckBox
+            android:button="@null"
+            android:id="@+id/mon"
+            android:onClick="onCheckBoxChecked"
+            android:background="@drawable/checkbox_selection"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:text="Mon"
+            android:gravity="center"
+            android:layout_marginRight="5dp"/>
+
+        <CheckBox
+            android:button="@null"
+            android:id="@+id/tue"
+            android:onClick="onCheckBoxChecked"
+            android:background="@drawable/checkbox_selection"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:text="Tue"
+            android:gravity="center"
+            android:layout_marginRight="5dp"/>
+
+        <CheckBox
+            android:button="@null"
             android:id="@+id/wed"
-            android:layout_width="50dp"
+            android:onClick="onCheckBoxChecked"
+            android:background="@drawable/checkbox_selection"
+            android:layout_width="40dp"
             android:layout_height="50dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/wedbutton"
-            android:text=""
-            android:textOff=""
-            android:textOn=""/>
-        <ToggleButton
-            android:id="@+id/thu"
-            android:layout_width="50dp"
+            android:text="Wed"
+            android:gravity="center"
+            android:layout_marginRight="5dp"/>
+
+        <CheckBox
+            android:button="@null"
+            android:id="@+id/thurs"
+            android:onClick="onCheckBoxChecked"
+            android:background="@drawable/checkbox_selection"
+            android:layout_width="40dp"
             android:layout_height="50dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/thubutton"
-            android:text=""
-            android:textOff=""
-            android:textOn=""/>
-        <ToggleButton
+            android:text="Thu"
+            android:gravity="center"
+            android:layout_marginRight="5dp"/>
+
+        <CheckBox
+            android:button="@null"
             android:id="@+id/fri"
-            android:layout_width="50dp"
+            android:onClick="onCheckBoxChecked"
+            android:background="@drawable/checkbox_selection"
+            android:layout_width="40dp"
             android:layout_height="50dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/fributton"
-            android:text=""
-            android:textOff=""
-            android:textOn=""/>
-        <ToggleButton
+            android:text="Fri"
+            android:gravity="center"
+            android:layout_marginRight="5dp"/>
+
+        <CheckBox
+            android:button="@null"
             android:id="@+id/sat"
-            android:layout_width="50dp"
+            android:onClick="onCheckBoxChecked"
+            android:background="@drawable/checkbox_selection"
+            android:layout_width="40dp"
             android:layout_height="50dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/satbutton"
-            android:text=""
-            android:textOff=""
-            android:textOn=""/>
+            android:text="Sat"
+            android:gravity="center"
+            android:layout_marginRight="5dp"/>
+
+        <CheckBox
+            android:button="@null"
+            android:id="@+id/sun"
+            android:onClick="onCheckBoxChecked"
+            android:background="@drawable/checkbox_selection"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:text="Sun"
+            android:gravity="center"
+            android:layout_marginRight="5dp"/>
+
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Set Alarm"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/alarmbox"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center"
+
+        />
 
 </LinearLayout>

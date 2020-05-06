@@ -75,22 +75,17 @@ public class callback_read_profile extends AsyncTask<String, String, ArrayList<H
 
                     HashMap<String, String> map = new HashMap<String, String>();
 
-                    map.put("name", c.getString("name"));
+                    map.put("nama", c.getString("name"));
                     map.put("username", c.getString("username"));
                     map.put("birth_date", c.getString("birth_date"));
                     map.put("handphone_numb", c.getString("handphone_numb"));
                     map.put("email", c.getString("email"));
-
+                    map.put("image_profile", c.getString("image_profile"));
                     arrayListRet.add(map);
                 }
             } else {
-                //Unsuccessfully picking book. Another driver has taken the order.
-                HashMap<String, String> map = new HashMap<String, String>();
 
-                map.put("success", String.valueOf(success));
-                map.put("message", message);
 
-                arrayListRet.add(map);
 
             }
         } catch (JSONException e) {
